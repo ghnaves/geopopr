@@ -1,11 +1,13 @@
 Package: Geopopr
-Title: What the Package Does (One Line, Title Case)
+Title: Population geography spatial analysis and visualization 
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+    person("Gustavo", "Givisiez", , "gh_naves@id.uff.br", role = c("aut", "cre"))
+Description: A package providing tools for spatial analysis and visualization in population geography, including density calculations, demographic indicators, and map projections. Designed for geographers and demographers working with spatial population data.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Imports: 
+    httr,
+    jsonlite
