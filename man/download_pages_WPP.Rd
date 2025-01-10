@@ -4,10 +4,10 @@
 \alias{download_pages_WPP}
 \title{Download Pages from WPP API}
 \usage{
-download_pages_WPP(url, headers)
+download_pages_WPP(target, headers)
 }
 \arguments{
-\item{url}{A string containing the URL of the API's first page.}
+\item{target}{A string containing the URL of the API's first page.}
 
 \item{headers}{A list of HTTP headers, typically including authorization.}
 }
@@ -18,9 +18,9 @@ A data frame containing the combined data from all pages.
 Downloads paginated data from the WPP API and combines it into a single data frame.
 }
 \examples{
-headers <- httr::add_headers(Authorization = Sys.getenv("WPP_ONU_BEARER"))
+headers <- c("Authorization" = Sys.getenv("WPP_ONU_BEARER"))
 base_url <- "https://population.un.org/dataportalapi/api/v1"
 target <- paste0(base_url, "/indicators/")
-indicators <- download_pages_WPP(target,headers)
+indicators <- download_pages_WPP(target, headers)
 print(indicators$name)
 }
