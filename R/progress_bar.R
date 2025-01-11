@@ -23,5 +23,5 @@ progress_bar <- function(iter, total) {
   bar <- paste0("|", strrep("=", num_filled), strrep(" ", 20 - num_filled), "|")
   # Mostrar progresso
   cat(paste0(sprintf("\r%s %d%%", bar, round(progress * 100))))
-  flush.console()
+  utils::flush.console()
 }
