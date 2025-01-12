@@ -8,6 +8,8 @@
 
 The goal of geopopr is to …
 
+Ainda em construção … :-(
+
 ## Installation
 
 You can install the development version of geopopr from
@@ -61,3 +63,8 @@ files, so they display on GitHub and CRAN.
 
 Arquivos binários grandes (geotiff, etc.) armazenados diretamente no
 sistema de arquivos, com os caminhos em banco de dados.
+
+# Fonte dos dados
+
+United Nations. (2024). World Population Prospects 2024.
+<https://population.un.org/wpp/>

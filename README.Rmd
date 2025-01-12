@@ -66,3 +66,7 @@ In that case, don't forget to commit and push the resulting figure files, so the
 **Parquet:** dados tabulares de grandes dimensões
 
 Arquivos binários grandes (geotiff, etc.) armazenados diretamente no sistema de arquivos, com os caminhos em banco de dados.
+
+# Fonte dos dados
+
+United Nations. (2024). World Population Prospects 2024. <https://population.un.org/wpp/>
