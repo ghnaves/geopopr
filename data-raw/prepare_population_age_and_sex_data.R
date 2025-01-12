@@ -1,14 +1,3 @@
-# Carregar dependências
-library(here)
-library(dplyr)
-library(DBI)
-library(RSQLite)
-
-# Configurações globais
-base_url <- "https://population.un.org/dataportalapi/api/v1"
-headers <- c("Authorization" = Sys.getenv("WPP_ONU_BEARER"))
-db_path <- here::here("inst/extdata", "population_data.sqlite")
-
 # Função para processar dados de um local e ano específico
 process_location_data <- function(location, year, base_url, headers) {
   target <- paste0(base_url,
@@ -105,7 +94,7 @@ check_metadata <- function(year, location, db) {
 # Função para processar todos os anos e locais
 process_all_data <- function(locations, years, base_url, headers, db) {
   for (year in years) {
-    cat(paste0("Processing year: ", year, "\n"))
+    cat(paste0("\rProcessing year: ", year, "\n"))
     n <- 0
     for (location in locations$locationId) {
       n <- n + 1
@@ -135,20 +124,43 @@ main <- function(locations_names, years, db_path) {
   process_all_data(locations_names, years, base_url, headers, db)
   # Fechar conexão
   dbDisconnect(db)
-  cat("Processing completed successfully!\n")
+  cat("\rProcessing completed successfully!\n")
 }
 
+# ----
+#EXECUÇÃO DO PROGRAMA
+
+# Carregar dependências
+library(here)
+library(dplyr)
+library(DBI)
+library(RSQLite)
+
+# Configurações globais
+base_url <- "https://population.un.org/dataportalapi/api/v1"
+headers <- c("Authorization" = Sys.getenv("WPP_ONU_BEARER"))
+db_path <- here::here("inst/extdata", "population_data.sqlite")
+
+
 # Carregar dados necessários
-locations_students = readRDS(here::here("data-raw", "alunos_2024_2.rds")) |>
+locations_students = readRDS(here::here("draft", "alunos_2024_2.rds")) |>
   mutate(iso = stringr::str_extract(pais, "(?<=Cod ISO: )\\w{3}")) |>
   filter(!is.na(iso)) |>
   select(iso)|>
   distinct()
-
 locations <- readRDS(here::here("data-raw", "locations_names.rds")) |>
   filter(location_iso3code %in% c(locations_students$iso,'BRA'))
 
-years <- seq(1970, 2060, 30)
+years <- c(seq(1975, 2100, 30))
 
-# Executar o programa
+# Executar o programa principal
+
 main(locations, years, db_path)
+
+query = paste0(
+  "SELECT DISTINCT year FROM metadata_population_age5_and_sex;")
+db_path = system.file("extdata", "population_data.sqlite", package = "geopopr")
+conn = RSQLite::dbConnect(RSQLite::SQLite(), db_path)
+RSQLite::dbGetQuery(conn, query)
+RSQLite::dbDisconnect(conn)
+
