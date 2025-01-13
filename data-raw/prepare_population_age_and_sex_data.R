@@ -94,7 +94,7 @@ check_metadata <- function(year, location, db) {
 # Função para processar todos os anos e locais
 process_all_data <- function(locations, years, base_url, headers, db) {
   for (year in years) {
-    cat(paste0("\rProcessing year: ", year, "\n"))
+    cat(paste0("\nProcessing year: ", year, "\n"))
     n <- 0
     for (location in locations$locationId) {
       n <- n + 1
@@ -102,7 +102,7 @@ process_all_data <- function(locations, years, base_url, headers, db) {
 
       # Verificar se os dados já foram processados
       if (check_metadata(year, location, db)) {
-        cat(paste0("Skipping: Year ", year, ", Location ", location, "\n"))
+        cat(paste0("\nSkipping: Year ", year, ", Location ", location, "\n"))
         next
       }
 
@@ -151,15 +151,20 @@ locations_students = readRDS(here::here("draft", "alunos_2024_2.rds")) |>
 locations <- readRDS(here::here("data-raw", "locations_names.rds")) |>
   filter(location_iso3code %in% c(locations_students$iso,'BRA'))
 
-years <- c(seq(1975, 2100, 30))
+years <- c(seq(2080, 2090, 5))
 
 # Executar o programa principal
 
 main(locations, years, db_path)
 
+# conn = RSQLite::dbConnect(RSQLite::SQLite(), db_path)
+# query= paste0("DELETE FROM data_population_age5_and_sex WHERE timeId = 136;")
+# #query= paste0("DELETE FROM metadata_population_age5_and_sex WHERE year = 2085;")
+# dbExecute(conn, query)
+# RSQLite::dbDisconnect(conn)
+
 query = paste0(
   "SELECT DISTINCT year FROM metadata_population_age5_and_sex;")
-db_path = system.file("extdata", "population_data.sqlite", package = "geopopr")
 conn = RSQLite::dbConnect(RSQLite::SQLite(), db_path)
 RSQLite::dbGetQuery(conn, query)
 RSQLite::dbDisconnect(conn)
