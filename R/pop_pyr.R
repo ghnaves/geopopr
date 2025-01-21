@@ -106,12 +106,11 @@ pop_pyr_data <- function(location, year, variant = c("Median","all")) {
   # Localização e ano
   loc_data <- loc_find(location, conn)
   year_data <- year_find(year, conn)
-
-  if (is.null(loc_data) || is.null(year_data)) stop("Location or time inexistent or not avaibale")
+  if (is.null(loc_data) || is.null(year_data)) {
+    stop("Location or time inexistent or not available") }
 
   loc_id <- loc_data$locationId
   year_id <- year_data$timeId
-
 
   # Consulta de dados populacionais
   VARIANT_ID <- 4
@@ -141,7 +140,6 @@ pop_pyr_data <- function(location, year, variant = c("Median","all")) {
                      levels=age_and_sex_f$sexs$sexId,
                      labels=age_and_sex_f$sexs$sex)
     )
-
   return(data)
 }
 #' Generate a Population Pyramid

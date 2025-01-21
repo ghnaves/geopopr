@@ -4,7 +4,7 @@
 \alias{pop_pyr_data}
 \title{Generate Population Pyramid Data}
 \usage{
-pop_pyr_data(location, year)
+pop_pyr_data(location, year, variant = c("Median", "all"))
 }
 \arguments{
 \item{location}{A character or numeric input specifying the location. This can be:
