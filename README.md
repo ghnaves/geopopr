@@ -51,6 +51,15 @@ files, so they display on GitHub and CRAN.
 Arquivos binários grandes (geotiff, etc.) armazenados diretamente no
 sistema de arquivos, com os caminhos em banco de dados.
 
+*The combination of some data and an aching desire for an answer does
+not ensure that a reasonable answer can be extracted from a given body
+of data.*
+
+— John W. Tukey (the first of six “basics” against statistician’s
+hubrises) in “Sunset Salvo”, American Statistician, 40, 72–76 (1986).
+
+quoted by the `fortunes` package
+
 # Fonte dos dados
 
 United Nations. (2024). World Population Prospects 2024.
